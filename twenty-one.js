@@ -154,7 +154,7 @@ class Dealer {
 }
 
 Object.assign(Player.prototype, Hand);
-Object.assigne(Dealer.prototype, Hand);
+Object.assign(Dealer.prototype, Hand);
 
 
 //Orchestration Engine:
@@ -162,8 +162,8 @@ Object.assigne(Dealer.prototype, Hand);
 class TwentyOneGame {
   static TARGET_SCORE = 21;
   static DEALER_MAX = this.TARGET_SCORE - 4;
-  static HIT = "hit";
-  static STAY = "stay";
+  static HIT = "h";
+  static STAY = "s";
 
   constructor() {
     this.player = new Player();
@@ -366,7 +366,7 @@ class TwentyOneGame {
     } else if (card.isFaceCard()) {
       return 10;
     } else {
-      return parseInte(card.getRank(), 10);
+      return parseInt(card.getRank(), 10);
     }
   }
 
