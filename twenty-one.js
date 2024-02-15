@@ -89,9 +89,58 @@ should quit when she is broke (0 dollars) or rich (has a total of 10 dollars).
 let readline = require("readline-sync");
 
 class Card {
-  constructor() {
-    //STUB
-    //states to add: rank? suit? points?
+  static SUITS = ["H", "S", "D", C]
+  static RANK = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+
+  constructor(suit, rank) {
+    this.suit = suit;
+    this.rank = rank;
+    this.hidden = false;
+  }
+
+  toString() {
+    if (this.isHidden()) return "Hidden";
+    return `${this.getRank()} of ${this.getSuit()}`;
+  }
+
+  getRank() {
+    return this.rank;
+  }
+
+  getSuit() {
+    return this.suit;
+  }
+
+  isAce() {
+    return this.getRank() === "A";
+  }
+
+  isKing() {
+    return this.getRank() === "K";
+  }
+
+  isQueen() {
+    return this.getRank() === "Q";
+  }
+
+  isJack() {
+    return this.getRank() === "J";
+  }
+
+  isFaceCard() {
+    return this.isKing() || this.isQueen() || this.isJack();
+  }
+
+  hide() {
+    this.hidden = true;
+  }
+
+  reveal() {
+    this.hidden = false;
+  }
+
+  isHidden() {
+    return this.hidden;
   }
 }
 
