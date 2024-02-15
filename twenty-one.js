@@ -86,11 +86,13 @@ should quit when she is broke (0 dollars) or rich (has a total of 10 dollars).
 */
 
 //CODE:
-let readline = require("readline-sync");
+const readline = require("readline-sync");
+const shuffle = require("shuffle-array");
+
 
 class Card {
   static SUITS = ["H", "S", "D", C]
-  static RANK = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+  static RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 
   constructor(suit, rank) {
     this.suit = suit;
@@ -146,15 +148,60 @@ class Card {
 
 class Deck {
   constructor() {
-    //STUB
-    //states: 52 cards? in an array or object?
+    this.cards = [];
+    Card.SUITS.forEach((suit) => {
+      Card.RANKS.forEach((rank) => {
+        this.cards.push(new Card(suit, rank));
+      });
+    });
+
+    this.shuffleCards();
   }
 
-  deal() {
-    //STUB
-    //this might move to the dealer class 
+  shuffleCards() {
+    shuffle(this.cards);
+  }
+
+  dealCardFaceUp() {
+    return this.cards.pop();
+  }
+
+  dealCardFaceDown() {
+    let card = this.dealCardFaceUp();
+    card.hide();
+    return card;
   }
 }
+
+let Hand = {
+  addToHand(newCard) {
+    this.cards.push(newCard);
+  },
+
+  resetHand() {
+    this.cards = [];
+  },
+
+  showHand(caption) {
+    console.log(caption);
+    console.log("");
+
+    this.cards.forEach((card) => console.log(` ${card}`));
+    console.log("");
+  }, 
+
+  getCards() {
+    return this.cards;
+  },
+
+  revealAllCards() {
+    this.cards.forEach((card) => card.reveal());
+  },
+  
+  numberOfCards() {
+    return this.cards.length; 
+  },
+};
 
 class Participant {
   constructor() {
