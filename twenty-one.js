@@ -138,7 +138,7 @@ class Player {
   }
 
   isRich() {
-    this.money >= Player.WINNING_PURSE;
+    return this.money >= Player.WINNING_PURSE;
   }
 
   showPurse() {
@@ -238,7 +238,7 @@ class TwentyOneGame {
   }
 
   dealerContinue() {
-    readline.question("Press Return to continue.");
+    readline.question("Press Return to continue...");
   }
   
   dealerTurn() {
@@ -272,6 +272,16 @@ class TwentyOneGame {
 
     this.player.showHand("Player's Cards");
     this.showScoreFor(this.player);
+  }
+
+  displayWelcomeMessage() {
+    console.clear();
+    console.log("Welcome to Twenty-One!");
+    console.log("");
+  }
+
+  displayGoodbyeMessage() {
+    console.log("Thanks for playing! Arrivederci!");
   }
 
   whoWon() {
@@ -375,17 +385,9 @@ class TwentyOneGame {
     console.log("");
   }
  
-  displayWelcomeMessage() {
-    console.clear();
-    console.log("Welcome to Twenty-One!");
-    console.log("");
-  }
-
-  displayGoodbyeMessage() {
-    console.log("Thanks for playing! Arrivederci!");
-  }
-
 }
 
 let game = new TwentyOneGame();
 game.start();
+
+
